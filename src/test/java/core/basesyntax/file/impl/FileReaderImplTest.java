@@ -6,11 +6,8 @@ import core.basesyntax.exception.FileProcessingException;
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,20 +48,15 @@ class FileReaderImplTest {
 
     @Test
     void read_UnreadableFile_Ok() throws IOException {
-        Path tempFile = tempDir.resolve("test1.txt");
-        Files.write(tempFile, List.of());
+        Path tempFile = tempDir.resolve("test.txt");
+        List<String> content = List.of("test");
+        Files.write(tempFile, content);
+        tempFile.toFile().setReadable(false);
 
-        try (FileChannel channel = FileChannel
-                .open(tempFile, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
-            FileLock lock = channel.lock();
-
-            InvalidDataException exception = assertThrows(
-                    InvalidDataException.class,
-                    () -> fileReader.read(tempFile.toString())
-            );
-            Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
-
-            lock.release();
-        }
+        InvalidDataException exception = assertThrows(
+                InvalidDataException.class,
+                () -> fileReader.read(tempFile.toString())
+        );
+        Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
     }
 }
