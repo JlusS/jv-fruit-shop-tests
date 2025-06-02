@@ -3,7 +3,6 @@ package core.basesyntax.file.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.FileProcessingException;
-import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -54,7 +53,8 @@ class FileReaderImplTest {
         Path tempFile = tempDir.resolve("test.txt");
         Files.write(tempFile, List.of());
 
-        try (FileChannel channel = FileChannel.open(tempFile, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
+        try (FileChannel channel = FileChannel
+                .open(tempFile, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
             FileLock lock = channel.lock();
 
             FileProcessingException exception = assertThrows(
