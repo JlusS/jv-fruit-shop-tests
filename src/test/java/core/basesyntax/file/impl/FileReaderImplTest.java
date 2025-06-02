@@ -54,14 +54,14 @@ class FileReaderImplTest {
         Path tempFile = tempDir.resolve("test.txt");
         Files.write(tempFile, List.of());
 
-        try (FileChannel channel = FileChannel.open(tempFile, StandardOpenOption.WRITE)) {
+        try (FileChannel channel = FileChannel.open(tempFile, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
             FileLock lock = channel.lock();
 
-            InvalidDataException exception = assertThrows(
-                    InvalidDataException.class,
+            FileProcessingException exception = assertThrows(
+                    FileProcessingException.class,
                     () -> fileReader.read(tempFile.toString())
             );
-            Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
+            Assertions.assertTrue(exception.getMessage().startsWith("Can't read file:"));
 
             lock.release();
         }
