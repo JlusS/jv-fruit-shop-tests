@@ -1,11 +1,11 @@
 package core.basesyntax.operation.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PurchaseOperationTest {
     private PurchaseOperation operation;

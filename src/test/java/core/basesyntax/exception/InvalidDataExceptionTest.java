@@ -9,5 +9,4 @@ public class InvalidDataExceptionTest {
         String message = exception.getMessage();
         assert message.equals("message");
     }
-
 }

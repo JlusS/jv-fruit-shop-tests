@@ -1,14 +1,14 @@
 package core.basesyntax.operation.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SupplyOperationTest {
-    SupplyOperation operation;
+    private SupplyOperation operation;
 
     @BeforeEach
     void setUp() {
@@ -24,7 +24,9 @@ class SupplyOperationTest {
 
     @Test
     void handle_NotExistentFruit_Ok() {
-        operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "phantom_banana", 10));
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY, "phantom_banana", 10);
+        operation.handle(transaction);
         assertEquals(10, FruitStorage.getStorage().get("phantom_banana"));
     }
 }

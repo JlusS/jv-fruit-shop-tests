@@ -1,9 +1,12 @@
 package core.basesyntax.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FruitTransactionTest {
     private FruitTransaction transaction1;
@@ -38,16 +41,20 @@ class FruitTransactionTest {
     @Test
     void toString_AllOperations_Ok() {
         FruitTransaction t1 = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "APPLE", 1);
-        assertEquals("FruitTransaction{operation=PURCHASE, fruit='APPLE', quantity=1}", t1.toString());
+        String expected1 = "FruitTransaction{operation=PURCHASE, fruit='APPLE', quantity=1}";
+        assertEquals(expected1, t1.toString());
 
         FruitTransaction t2 = new FruitTransaction(FruitTransaction.Operation.BALANCE, "BANANA", 5);
-        assertEquals("FruitTransaction{operation=BALANCE, fruit='BANANA', quantity=5}", t2.toString());
+        String expected2 = "FruitTransaction{operation=BALANCE, fruit='BANANA', quantity=5}";
+        assertEquals(expected2, t2.toString());
 
         FruitTransaction t3 = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "ORANGE", 3);
-        assertEquals("FruitTransaction{operation=SUPPLY, fruit='ORANGE', quantity=3}", t3.toString());
+        String expected3 = "FruitTransaction{operation=SUPPLY, fruit='ORANGE', quantity=3}";
+        assertEquals(expected3, t3.toString());
 
         FruitTransaction t4 = new FruitTransaction(FruitTransaction.Operation.RETURN, "GRAPE", 2);
-        assertEquals("FruitTransaction{operation=RETURN, fruit='GRAPE', quantity=2}", t4.toString());
+        String expected4 = "FruitTransaction{operation=RETURN, fruit='GRAPE', quantity=2}";
+        assertEquals(expected4, t4.toString());
     }
 
     @Test

@@ -1,10 +1,13 @@
 package core.basesyntax.report;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.model.FruitStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReportGeneratorImplTest {
     private ReportGenerator generator;
@@ -76,6 +79,4 @@ class ReportGeneratorImplTest {
         assertTrue(report.contains("7"));
         assertTrue(report.contains("grape"));
     }
-
-
 }

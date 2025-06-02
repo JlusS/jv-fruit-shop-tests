@@ -1,6 +1,5 @@
 package core.basesyntax.exception;
 
-
 import org.junit.Test;
 
 public class FileProcessingExceptionTest {
@@ -10,5 +9,4 @@ public class FileProcessingExceptionTest {
         String message = exception.getMessage();
         assert message.equals("message");
     }
-
 }

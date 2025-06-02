@@ -1,19 +1,18 @@
 package core.basesyntax.file.impl;
 
+import static org.junit.Assert.assertThrows;
+
+import java.nio.file.Path;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.nio.file.Path;
-
-import static org.junit.Assert.assertThrows;
-
 class FileWriterImplTest {
-    private FileWriterImpl fileWriter;
-
     @TempDir
-    Path tempDir;
+    private Path tempDir;
+
+    private FileWriterImpl fileWriter;
 
     @BeforeEach
     void setUp() {
@@ -47,7 +46,7 @@ class FileWriterImplTest {
     }
 
     @Test
-    void write_IOException_Ok() {
+    void writeIoExceptionOk() {
         Path tempFile = tempDir.resolve("/nonexistent/directory/test.txt");
         RuntimeException exception = assertThrows(
                 RuntimeException.class,

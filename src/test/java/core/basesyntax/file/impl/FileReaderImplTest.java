@@ -1,12 +1,10 @@
 package core.basesyntax.file.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exception.FileProcessingException;
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -14,13 +12,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class FileReaderImplTest {
-    private FileReader fileReader;
     @TempDir
-    Path tempDir;
+    private Path tempDir;
+    private FileReader fileReader;
 
     @BeforeEach
     void setUp() {
@@ -58,12 +58,12 @@ class FileReaderImplTest {
             FileLock lock = channel.lock();
 
             InvalidDataException exception = assertThrows(
-                InvalidDataException.class,
-                () -> fileReader.read(tempFile.toString())
-        );
-        Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
+                    InvalidDataException.class,
+                    () -> fileReader.read(tempFile.toString())
+            );
+            Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
 
-        lock.release();
+            lock.release();
         }
     }
 }
