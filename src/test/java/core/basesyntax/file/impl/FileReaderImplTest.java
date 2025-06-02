@@ -51,7 +51,7 @@ class FileReaderImplTest {
 
     @Test
     void read_UnreadableFile_Ok() throws IOException {
-        Path tempFile = tempDir.resolve("test.txt");
+        Path tempFile = tempDir.resolve("test1.txt");
         Files.write(tempFile, List.of());
 
         try (FileChannel channel = FileChannel
