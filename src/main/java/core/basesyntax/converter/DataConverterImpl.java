@@ -11,12 +11,12 @@ public class DataConverterImpl implements DataConverter {
     public List<FruitTransaction> convertToTransaction(List<String> rawData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         rawData.stream()
-                .filter(line -> !line.trim().isEmpty())
+                .filter(line -> !line.isEmpty())
                 .skip(1)
                 .map(line -> line.split(SEPARATOR))
                 .forEach(parts -> {
                     fruitTransactions
-                            .add(new FruitTransaction(FruitTransaction.fromCode(parts[0]),
+                            .add(new FruitTransaction(FruitTransaction.Operation.fromCode(parts[0]),
                                     parts[1],
                                     Integer.parseInt(parts[2])));
                 });

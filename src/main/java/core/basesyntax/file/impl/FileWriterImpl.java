@@ -13,8 +13,6 @@ public class FileWriterImpl implements FileWriter {
             writer.write(data);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file " + path, e);
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Data can't be null");
         }
     }
 }

@@ -32,15 +32,6 @@ public class FruitTransaction {
                 + '}';
     }
 
-    public static Operation fromCode(String code) {
-        for (Operation op : Operation.values()) {
-            if (op.getCode().equals(code)) {
-                return op;
-            }
-        }
-        throw new IllegalArgumentException("Invalid code: " + code);
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -55,6 +46,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation fromCode(String code) {
+            for (Operation op : Operation.values()) {
+                if (op.getCode().equals(code)) {
+                    return op;
+                }
+            }
+            throw new IllegalArgumentException("Invalid code: " + code);
         }
     }
 

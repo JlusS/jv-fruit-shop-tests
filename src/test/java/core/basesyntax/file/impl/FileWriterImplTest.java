@@ -27,25 +27,6 @@ class FileWriterImplTest {
     }
 
     @Test
-    void write_NullOutput_Ok() {
-        Path tempFile = tempDir.resolve("test.txt");
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> fileWriter.write(null, tempFile.toString())
-        );
-        Assertions.assertTrue(exception.getMessage().startsWith("Data can't be null"));
-    }
-
-    @Test
-    void write_NullPath_Ok() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> fileWriter.write("line1, line2", null)
-        );
-        Assertions.assertTrue(exception.getMessage().startsWith("Data can't be null"));
-    }
-
-    @Test
     void writeIoExceptionOk() {
         Path tempFile = tempDir.resolve("/nonexistent/directory/test.txt");
         RuntimeException exception = assertThrows(

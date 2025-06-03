@@ -7,12 +7,10 @@ import core.basesyntax.operation.OperationHandler;
 public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        if (!FruitStorage.getStorage().containsKey(transaction.getFruit())) {
-            FruitStorage.getStorage().put(transaction.getFruit(), transaction.getQuantity());
-            return;
-        }
-        FruitStorage.getStorage()
-                .put(transaction.getFruit(), FruitStorage.getStorage()
-                        .get(transaction.getFruit()) + transaction.getQuantity());
+        FruitStorage.getStorage().put(
+                transaction.getFruit(),
+                FruitStorage.getStorage()
+                        .getOrDefault(transaction.getFruit(), 0)
+                        + transaction.getQuantity());
     }
 }

@@ -62,47 +62,47 @@ class FruitTransactionTest {
         // Test that we go through all valid codes and still throw exception for invalid
         String invalidCode = "z"; // A code that doesn't match any operation
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> FruitTransaction.fromCode(invalidCode));
+                () -> FruitTransaction.Operation.fromCode(invalidCode));
         assertEquals("Invalid code: " + invalidCode, exception.getMessage());
     }
 
     @Test
     void fromCode_validCode_Ok() {
-        assertEquals(transaction1.getOperation(), FruitTransaction.fromCode("p"));
+        assertEquals(transaction1.getOperation(), FruitTransaction.Operation.fromCode("p"));
     }
 
     @Test
     void fromCode_completePathCoverage_Ok() {
         // First verify we can match each code in sequence
         for (FruitTransaction.Operation op : FruitTransaction.Operation.values()) {
-            assertEquals(op, FruitTransaction.fromCode(op.getCode()));
+            assertEquals(op, FruitTransaction.Operation.fromCode(op.getCode()));
         }
 
         // Now verify the exception path with different invalid inputs
         String[] invalidCodes = {"x", "z", "q", "", "abc"};
         for (String invalidCode : invalidCodes) {
             IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
-                    () -> FruitTransaction.fromCode(invalidCode));
+                    () -> FruitTransaction.Operation.fromCode(invalidCode));
             assertEquals("Invalid code: " + invalidCode, e.getMessage());
         }
 
         // Also test null specifically
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
-                () -> FruitTransaction.fromCode(null));
+                () -> FruitTransaction.Operation.fromCode(null));
         assertEquals("Invalid code: " + null, e.getMessage());
     }
 
     @Test
     void fromCode_nullCode_Ok() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> FruitTransaction.fromCode(null));
+                () -> FruitTransaction.Operation.fromCode(null));
         assertTrue(exception.getMessage().startsWith("Invalid code:"));
     }
 
     @Test
     void fromCode_emptyCode_Ok() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> FruitTransaction.fromCode(""));
+                () -> FruitTransaction.Operation.fromCode(""));
         assertTrue(exception.getMessage().startsWith("Invalid code:"));
     }
 }

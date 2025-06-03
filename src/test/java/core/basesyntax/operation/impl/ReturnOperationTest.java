@@ -20,7 +20,9 @@ class ReturnOperationTest {
         FruitStorage.getStorage().put("pineapple", 10);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "pineapple", 10);
+        System.out.println(FruitStorage.getStorage());
         operation.handle(transaction);
+        System.out.println(FruitStorage.getStorage());
         assertEquals(20, FruitStorage.getStorage().get("pineapple"));
     }
 

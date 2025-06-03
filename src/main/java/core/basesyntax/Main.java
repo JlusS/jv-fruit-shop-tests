@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
-    private static final String OUTPUT_FILE_PATH = "finalReport.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
