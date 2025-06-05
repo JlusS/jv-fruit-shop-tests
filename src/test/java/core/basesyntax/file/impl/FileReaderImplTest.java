@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private final String correctFile = "src/test/resources/data.csv";
+    private final String correctFile = "src/main/resources/data.csv";
     private FileReader fileReader;
 
     @BeforeEach
