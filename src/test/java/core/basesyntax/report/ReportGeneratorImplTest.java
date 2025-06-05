@@ -63,7 +63,7 @@ class ReportGeneratorImplTest {
         FruitStorage.getStorage().put("orange", 10);
 
         String report = generator.getReport();
-        String[] lines = report.split(System.lineSeparator());
+        String[] lines = report.split("\r\n");
 
         assertEquals("fruit,quantity", lines[0]);
         assertEquals("orange,10", lines[1]);
