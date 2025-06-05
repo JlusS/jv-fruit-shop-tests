@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitStorage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +28,10 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_ShouldContainCorrectHeader() {
+        FruitStorage.getStorage().put("banana", 152);
+        FruitStorage.getStorage().put("apple", 90);
         String report = generator.getReport();
-        String[] lines = report.split(System.lineSeparator());
-        assertEquals("fruit,quantity", lines[0]);
+        assertEquals("fruit,quantity\r\nbanana,152\r\napple,90\r\n", report);
     }
 
     @Test
@@ -45,7 +47,6 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_ShouldContainStorageEntries() {
-        FruitStorage.getStorage().clear();
         FruitStorage.getStorage().put("apple", 5);
         FruitStorage.getStorage().put("banana", 3);
 
@@ -59,7 +60,6 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_StorageEntriesShouldBeCorrectlyFormatted() {
-        FruitStorage.getStorage().clear();
         FruitStorage.getStorage().put("orange", 10);
 
         String report = generator.getReport();
@@ -71,12 +71,16 @@ class ReportGeneratorImplTest {
 
     @Test
     void getReport_ShouldIncludeStorageValues() {
-        FruitStorage.getStorage().clear();
         FruitStorage.getStorage().put("grape", 7);
 
         String report = generator.getReport();
 
         assertTrue(report.contains("7"));
         assertTrue(report.contains("grape"));
+    }
+
+    @AfterEach
+    void setStorage() {
+        FruitStorage.getStorage().clear();
     }
 }

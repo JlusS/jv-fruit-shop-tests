@@ -3,6 +3,7 @@ package core.basesyntax.operation.impl;
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
@@ -15,5 +16,10 @@ class OperationStrategyImplTest {
         OperationStrategyImpl strategy = new OperationStrategyImpl(
                 Map.of(FruitTransaction.Operation.PURCHASE, new PurchaseOperation()));
         strategy.processTransaction(transactionPurchase);
+    }
+
+    @AfterAll
+    static void cleanMeth() {
+        FruitStorage.getStorage().clear();
     }
 }

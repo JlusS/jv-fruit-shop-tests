@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationStrategy;
+import core.basesyntax.operation.impl.BalanceOperation;
 import core.basesyntax.operation.impl.OperationStrategyImpl;
+import core.basesyntax.operation.impl.PurchaseOperation;
+import core.basesyntax.operation.impl.ReturnOperation;
 import core.basesyntax.operation.impl.SupplyOperation;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,10 @@ class ShopServiceImplTest {
     @BeforeEach
     void setUp() {
         strategy = new OperationStrategyImpl(
-                Map.of(FruitTransaction.Operation.SUPPLY, new SupplyOperation()));
+                Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                        FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
+                        FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                        FruitTransaction.Operation.RETURN, new ReturnOperation()));
     }
 
     @Test

@@ -5,18 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.exception.FileProcessingException;
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 class FileReaderImplTest {
-    @TempDir
-    private Path tempDir;
+    private final String correctFile = "src/test/resources/data.csv";
     private FileReader fileReader;
 
     @BeforeEach
@@ -25,19 +21,15 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_ValidFile_Ok() throws IOException {
-        Path tempFile = tempDir.resolve("test.txt");
-        List<String> expectedContent = List.of("line1", "line2");
-        Files.write(tempFile, expectedContent);
-
-        List<String> actualContent = fileReader.read(tempFile.toString());
-
+    void read_ValidFile_Ok() {
+        List<String> expectedContent = List.of("type,fruit,quantity");
+        List<String> actualContent = fileReader.read(correctFile);
         Assertions.assertEquals(expectedContent, actualContent);
     }
 
     @Test
-    void read_FileNotFound_Ok() {
-        String nonExistentPath = tempDir.resolve("non-existent.txt").toString();
+    void read_FileNotFound_notOk() {
+        String nonExistentPath = "not-existing-file.csv";
 
         FileProcessingException exception = assertThrows(
                 FileProcessingException.class,
@@ -47,15 +39,13 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_UnreadableFile_Ok() throws IOException {
-        Path tempFile = tempDir.resolve("test.txt");
-        List<String> content = List.of("test");
-        Files.write(tempFile, content);
-        tempFile.toFile().setReadable(false);
+    void read_UnreadableFile_notOk() {
+        File file = new File(correctFile);
+        file.setReadable(false);
 
         InvalidDataException exception = assertThrows(
                 InvalidDataException.class,
-                () -> fileReader.read(tempFile.toString())
+                () -> fileReader.read(correctFile)
         );
         Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
     }

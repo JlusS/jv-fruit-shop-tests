@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,10 @@ class SupplyOperationTest {
                 FruitTransaction.Operation.SUPPLY, "phantom_banana", 10);
         operation.handle(transaction);
         assertEquals(10, FruitStorage.getStorage().get("phantom_banana"));
+    }
+
+    @AfterAll
+    static void cleanMeth() {
+        FruitStorage.getStorage().clear();
     }
 }
