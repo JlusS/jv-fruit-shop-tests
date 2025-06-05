@@ -12,7 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private final String correctFile = "src/main/resources/data.csv";
+    private final String correctFile = "src/test/resources/data.csv";
+    private final String unreadableFile = "src/test/resources/unreadableFile.csv";
     private FileReader fileReader;
 
     @BeforeEach
@@ -42,12 +43,12 @@ class FileReaderImplTest {
 
     @Test
     void read_UnreadableFile_notOk() {
-        File file = new File(correctFile);
+        File file = new File(unreadableFile);
         file.setReadable(false);
 
         InvalidDataException exception = assertThrows(
                 InvalidDataException.class,
-                () -> fileReader.read(correctFile)
+                () -> fileReader.read(unreadableFile)
         );
         Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
     }
