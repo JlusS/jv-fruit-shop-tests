@@ -6,7 +6,6 @@ import core.basesyntax.exception.FileProcessingException;
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
 import java.io.File;
-import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
