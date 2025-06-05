@@ -3,9 +3,9 @@ package core.basesyntax.file.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.FileProcessingException;
-//import core.basesyntax.exception.InvalidDataException;
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
-//import java.io.File;
+import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ class FileReaderImplTest {
         Assertions.assertTrue(exception.getMessage().startsWith("File not found:"));
     }
 
-    /*@Test
+    @Test
     void read_UnreadableFile_notOk() {
         File file = new File(correctFile);
         file.setReadable(false);
@@ -50,5 +50,5 @@ class FileReaderImplTest {
                 () -> fileReader.read(correctFile)
         );
         Assertions.assertTrue(exception.getMessage().startsWith("Error while reading file:"));
-    }*/
+    }
 }
