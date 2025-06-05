@@ -11,12 +11,12 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport() {
         StringBuilder report = new StringBuilder();
 
-        report.append(CSV_HEADER).append(System.lineSeparator());
+        report.append(CSV_HEADER).append("\r\n");
         for (Map.Entry<String, Integer> entry : FruitStorage.getStorage().entrySet()) {
             report.append(entry.getKey())
                     .append(CSV_SEPARATOR)
                     .append(entry.getValue())
-                    .append(System.lineSeparator());
+                    .append("\r\n");
         }
         return report.toString();
     }
