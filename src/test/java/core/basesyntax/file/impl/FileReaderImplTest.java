@@ -23,10 +23,10 @@ class FileReaderImplTest {
 
     @Test
     void read_ValidFile_Ok() {
-        List<String> expectedContent = List.of("type,fruit,quantity, b,banana,20, b,apple,100,"
+        String expectedContent = "[type,fruit,quantity, b,banana,20, b,apple,100,"
                 + " s,banana,100, p,banana,13, r,apple,10, "
-                + "p,apple,20, p,banana,5, s,banana,50");
-        List<String> actualContent = fileReader.read(correctFile);
+                + "p,apple,20, p,banana,5, s,banana,50]";
+        String actualContent = fileReader.read(correctFile).toString();
         Assertions.assertEquals(expectedContent, actualContent);
     }
 
